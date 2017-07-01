@@ -1,6 +1,7 @@
 package com.imudges.takeoutweb.module.v1.restaurant;
 
 import com.imudges.takeoutweb.bean.restaurant.RestaurantVersion;
+import com.imudges.takeoutweb.util.Toolkit;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -24,9 +25,12 @@ public class RestaurantModule {
     @Filters
     @At("/check_version")
     @Ok("json")
-    public void chekcVersion(){
+    public Object chekcVersion(){
         RestaurantVersion version = dao.fetch(RestaurantVersion.class, Cnd.where("id",">=", 0).desc("id"));
-//        if ()
-
+        if (version == null){
+            return Toolkit.getFailResult(-1,"检查失败，服务器上不包含任何版本的信息", null);
+        }else {
+            return Toolkit.getSuccessResult("检查成功", version);
+        }
     }
 }

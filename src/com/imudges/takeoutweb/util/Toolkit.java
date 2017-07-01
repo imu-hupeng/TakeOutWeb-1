@@ -109,12 +109,12 @@ public class Toolkit {
         return Lang.digest("SHA-512",Lang.digest("SHA-512",System.currentTimeMillis() + slat) + slat).substring(32);
     }
 
-    public static NutMap getSuccessResult(String msg, NutMap data){
+    public static NutMap getSuccessResult(String msg, Object data){
         NutMap result = new NutMap();
         return result.setv("ret",0).setv("msg", msg).setv("data", data);
     }
 
-    public static NutMap getFailResult(int ret, String msg, NutMap data){
+    public static NutMap getFailResult(int ret, String msg, Object data){
         NutMap result = new NutMap();
         return result.setv("ret",ret).setv("msg", msg).setv("data", data);
     }

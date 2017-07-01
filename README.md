@@ -1,5 +1,5 @@
 # TakeOutWeb的API说明(v1)
-##* 技术概要：
+## *技术概要：
 客户端推荐采用
 XUtils3框架，Gson，AnyVersion编写
 

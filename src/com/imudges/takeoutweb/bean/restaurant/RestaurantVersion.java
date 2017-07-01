@@ -27,7 +27,7 @@ public class RestaurantVersion {
     private int forced;
 
     @Column("version_description")
-    private int versionDescription;
+    private String versionDescription;
 
     @Column("add_time")
     private Date addTime;
@@ -72,11 +72,11 @@ public class RestaurantVersion {
         this.forced = forced;
     }
 
-    public int getVersionDescription() {
+    public String getVersionDescription() {
         return versionDescription;
     }
 
-    public void setVersionDescription(int versionDescription) {
+    public void setVersionDescription(String versionDescription) {
         this.versionDescription = versionDescription;
     }
 

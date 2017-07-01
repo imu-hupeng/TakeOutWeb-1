@@ -21,7 +21,7 @@ public class MainSetup implements Setup{
         Ioc ioc = conf.getIoc();
         Dao dao = ioc.get(Dao.class);
         Daos.createTablesInPackage(dao, "com.imudges.takeoutweb", false);
-        ioc.get(NutQuartzCronJobFactory.class);
+//        ioc.get(NutQuartzCronJobFactory.class);
     }
 
 }

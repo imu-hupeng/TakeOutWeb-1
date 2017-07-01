@@ -21,6 +21,7 @@ public class MarketModule {
     @Inject
     Dao dao;
 
+    @Filters
     @At("/check_version")
     @Ok("json")
     public Object checkVersion(){
@@ -41,7 +42,8 @@ public class MarketModule {
     }
 
     @At("/login")
-    @Ok("json:{locked:{password|id}}")
+    @Ok("json:{locked:'password|id'}")
+    @Filters
     public Object login(@Param("username")String username, @Param("password")String password){
         NutMap result = null;
         boolean loginFlag = true;
@@ -49,11 +51,15 @@ public class MarketModule {
                 Cnd.where("username","=", username).and("password", "=", password));
         if (user == null){
             loginFlag = false;
-        }else {
-
         }
-
+        if (loginFlag){
+            result = Toolkit.getSuccessResult("登录成功", user);
+        }else {
+            result = Toolkit.getFailResult(-1,"登录失败", null);
+        }
         return result;
     }
+
+
 
 }

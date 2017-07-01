@@ -37,22 +37,22 @@ public class RestaurantModule {
     @Ok("json:{locked:'password|id'}")
     @At("/login")
     public Object login(@Param("username")String username, @Param("password")String password){
-        boolean loginResult = true;
+        boolean loginFlag = true;
         NutMap result = null;
 
         RestaurantUser user = dao.fetch(RestaurantUser.class,
                 Cnd.where("username", "=", username).and("password","=", password));
         if (user == null){
-            loginResult = false;
+            loginFlag = false;
         }
-        if (!loginResult){
+        if (!loginFlag){
             user = dao.fetch(RestaurantUser.class,
                     Cnd.where("phone", "=", username).and("password","=", password));
             if (user != null){
-                loginResult = true;
+                loginFlag = true;
             }
         }
-        if (loginResult){
+        if (loginFlag){
             user.setAk(Toolkit.getAccessKey());
             dao.update(user);
             result = Toolkit.getSuccessResult("登录成功", user);
@@ -62,4 +62,22 @@ public class RestaurantModule {
         return result;
     }
 
+    @At("/check_login_status")
+    @Ok("json:{locked:'password|id'}")
+    @Filters
+    public Object checkLoginStatus(@Param("ak")String ak){
+        NutMap result = null;
+        boolean checkFlag = true;
+
+        RestaurantUser user = dao.fetch(RestaurantUser.class, Cnd.where("ak", "=", ak));
+        if (user == null){
+            checkFlag = false;
+        }
+        if(checkFlag){
+            result = Toolkit.getSuccessResult("当前登录状态有效",user);
+        }else {
+            result = Toolkit.getFailResult(-1, "当前登录状态无效",null);
+        }
+        return result;
+    }
 }

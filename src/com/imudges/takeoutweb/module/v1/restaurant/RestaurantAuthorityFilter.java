@@ -34,7 +34,7 @@ public class RestaurantAuthorityFilter implements ActionFilter {
         RestaurantUser restaurantUser = dao.fetch(RestaurantUser.class, Cnd.where("ak", "=", ak));
 
         if (restaurantUser == null){
-            NutMap map = Toolkit.getFailResult(-1,"登录状态失效,请重新登录", null);
+            NutMap map = Toolkit.getFailResult(-100,"登录状态失效,请重新登录", null);
             return new ViewWrapper(new UTF8JsonView(new JsonFormat(true)), map);
         }else {
             session.setAttribute("user", restaurantUser);

@@ -27,5 +27,6 @@ public class RestaurantModule {
     public void chekcVersion(){
         RestaurantVersion version = dao.fetch(RestaurantVersion.class, Cnd.where("id",">=", 0).desc("id"));
 //        if ()
+
     }
 }

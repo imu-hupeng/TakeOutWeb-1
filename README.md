@@ -36,7 +36,7 @@
 
 ### 用户登录
 #### 地址：/v1/restaurant/login
-#### 参数：username=[username]&password=[password]
+#### 参数：username=[username or phone]&password=[password]
 #### 成功返回样例
 ```json
 {

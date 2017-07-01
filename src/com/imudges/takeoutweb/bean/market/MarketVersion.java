@@ -2,12 +2,14 @@ package com.imudges.takeoutweb.bean.market;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
+import org.nutz.dao.entity.annotation.Table;
 
 import java.util.Date;
 
 /**
  * Created by HUPENG on 2017/7/1.
  */
+@Table("market_version")
 public class MarketVersion {
     @Id
     private int id;

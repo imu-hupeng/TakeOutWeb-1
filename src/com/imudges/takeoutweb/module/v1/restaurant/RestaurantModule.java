@@ -16,7 +16,7 @@ import org.nutz.mvc.annotation.*;
 @IocBean
 @At("/v1/restaurant")
 @Fail("http:500")
-@Filters
+@Filters(@By(type = RestaurantAuthorityFilter.class ,args={"ioc:restaurantAuthorityFilter"}))
 public class RestaurantModule {
     @Inject
     Dao dao;

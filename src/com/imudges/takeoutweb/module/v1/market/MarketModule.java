@@ -11,6 +11,8 @@ import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by HUPENG on 2017/7/1.
  */
@@ -24,7 +26,7 @@ public class MarketModule {
     @Filters
     @At("/check_version")
     @Ok("json")
-    public Object checkVersion(){
+    public Object checkVersion(HttpServletRequest request){
         boolean checkFlag = true;
         NutMap result = null;
         MarketVersion version = dao.fetch(MarketVersion.class, Cnd.where("id",">=", "0").desc("id"));
@@ -36,7 +38,7 @@ public class MarketModule {
             result = Toolkit.getSuccessResult("版本检查成功", version);
         }else {
             //服务器上不存在任何版本
-            result = Toolkit.getFailResult(-1, "版本检查失败", null);
+            result = Toolkit.getFailResult(-1, "版本检查失败" + request.getServletContext().getRealPath("/"), null);
         }
         return result;
     }
@@ -59,7 +61,4 @@ public class MarketModule {
         }
         return result;
     }
-
-
-
 }
